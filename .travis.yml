@@ -1,14 +1,18 @@
 language: python
-
 python: 2.7
-
 sudo: false
-
 cache: pip
-
 install:
-  - python setup.py install
-
-
+- pip install pipenv
+- pipenv install --dev
+- pipenv graph
 script:
-  - py.test -vv tests
+- pipenv run py.test -vv tests
+deploy:
+  provider: pypi
+  user: uc-ctds
+  skip_existing: true
+  on:
+    branch: chore/pypi
+  password:
+    secure: 30XcsBoxnjn4zHIBEaBL0sBTo/y8XH0jXpK5XgAVKoNjsUWG82lHXzINupwO1MqdbkD9YAGg0FQkn3dfS4T/6thssVOLv0ug9TnhSs+RkU2mKVw6wdGSYhWl183PjspaAYE2zYQaCYBPL7PWe9uWXvUUYbIB71gJdZw+sx40ULOW7me/r2ZnCJutfCwEuggomxbxSrRm5nolH/9JQ4tBBbCIq76u0PLIJ74sXhqCwIp9oQj5i6roqZujWL04iNpi9QsLgcyBVJx1VI364eEoydNF8w0Sry5VdWpqaE9ENpCuVfNoYd22Y7X7vDboNa9+moWFm0Isb0NuxuOBa49du507XolPU0ptQcaQTGaBI0sqb7rg8DF6rwtKc2SxSmFEDnwh9KQfzJdrbDFBI40IDOkOheBTjZeQ2tFiAj4RV1D7yyorXX2kRWstSETefXyZNQ4v37TyrPTwHmOLlXHvZ6Dw8jih4qmp7vmyY+4F8ISUlaImgyrk5QkpZ0phq0zoyhprhVrVNSIi9LsABNIO8RLF689ZstyaTYth1erCBSV05QJdmBzwGBxth1Bhn+5KF816WUGHFVDgZx2UPrvREt6xUn5q1OwNZoZf6A2qXfDtBiq7wiJb9a2FOzlJt48QYEhF+ZVCOnxqNmg3QOn5SlY5w0NVSMkGUwGEwiEZgKU=
